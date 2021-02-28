@@ -1,6 +1,7 @@
 import 'package:quiz_app/question.dart';
 
 class QuizBrain {
+  int _questionNumber = 0;
   List<Question> _questionBank = [
     Question(q: 'Lord Tyrannus was trained by Yoda.', a: true),
     Question(q: 'Bounty Hunter\'s only serve the Empire', a: false),
@@ -9,11 +10,17 @@ class QuizBrain {
     Question(q: "Luke is Leia's sister", a: false),
   ];
 
-  String getQuestionText(int questionNumber) {
-    return _questionBank[questionNumber].questionText;
+  void nextQuestion() {
+    if (_questionNumber < _questionBank.length - 1) {
+      _questionNumber++;
+    }
   }
 
-  bool getQuestionAnswer(int questionNumber) {
-    return _questionBank[questionNumber].questionAnswer;
+  String getQuestionText() {
+    return _questionBank[_questionNumber].questionText;
+  }
+
+  bool getQuestionAnswer() {
+    return _questionBank[_questionNumber].questionAnswer;
   }
 }
