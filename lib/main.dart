@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_app/question.dart';
+import 'question.dart';
 
 void main() => runApp(QuizzApp());
 
@@ -28,6 +30,7 @@ class QuizPage extends StatefulWidget {
 class _QuizPageState extends State<QuizPage> {
   List<Icon> scoreKeeper = [];
 
+  /* Reference For list based implementation
   List<String> questions = [
     'Lord Tyrannus was trained by Yoda.',
     'Obi-Wan is Ben Kenobi',
@@ -40,6 +43,13 @@ class _QuizPageState extends State<QuizPage> {
     true,
     false,
     false,
+  ]; */
+
+  List<Question> questionBank = [
+    Question(q: 'Lord Tyrannus was trained by Yoda.', a: true),
+    Question(q: 'Bounty Hunter\'s only serve the Empire', a: false),
+    Question(q: 'Obi-Wan is Ben Kenobi', a: true),
+    Question(q: "Leia is Han Solo's sister", a: false),
   ];
 
   int questionNumber = 0;
@@ -56,7 +66,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                questions[questionNumber],
+                questionBank[questionNumber].questionText,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25.0,
@@ -80,7 +90,8 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
-                bool correctAnswer = answers[questionNumber];
+                bool correctAnswer =
+                    questionBank[questionNumber].questionAnswer;
                 if (correctAnswer == true) {
                   print('User got it right');
                 } else {
@@ -107,7 +118,8 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
-                bool correctAnswer = answers[questionNumber];
+                bool correctAnswer =
+                    questionBank[questionNumber].questionAnswer;
                 if (correctAnswer == false) {
                   print('User got it right');
                 } else {
