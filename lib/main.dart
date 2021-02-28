@@ -31,6 +31,15 @@ class QuizPage extends StatefulWidget {
 class _QuizPageState extends State<QuizPage> {
   List<Icon> scoreKeeper = [];
 
+  void checkAnswer(bool userPickedAnswer) {
+    bool correctAnswer = quizBrain.getQuestionAnswer();
+    if (userPickedAnswer == correctAnswer) {
+      scoreKeeper.add(Icon(Icons.check, color: Colors.green));
+    } else {
+      scoreKeeper.add(Icon(Icons.close, color: Colors.red));
+    }
+  }
+
   /* Reference For list based implementation
   List<String> questions = [
     'Lord Tyrannus was trained by Yoda.',
@@ -82,14 +91,8 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
-                bool correctAnswer = quizBrain.getQuestionAnswer();
-                if (correctAnswer == true) {
-                  print('User got it right');
-                } else {
-                  print('User got it Wrong!');
-                }
+                checkAnswer(true);
                 setState(() {
-                  scoreKeeper.add(Icon(Icons.check, color: Colors.green));
                   quizBrain.nextQuestion();
                 });
               },
@@ -109,14 +112,8 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
-                bool correctAnswer = quizBrain.getQuestionAnswer();
-                if (correctAnswer == false) {
-                  print('User got it right');
-                } else {
-                  print('User got it Wrong!');
-                }
+                checkAnswer(false);
                 setState(() {
-                  scoreKeeper.add(Icon(Icons.close, color: Colors.red));
                   quizBrain.nextQuestion();
                 });
               },
